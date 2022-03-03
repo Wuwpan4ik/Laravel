@@ -1,0 +1,47 @@
+// Fonts
+//@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+.profile {
+    margin: 50px 0;
+}
+.profile__notes {
+    margin-left: 15px;
+}
+.profile__notes-all *{
+    display: inline-block;
+    padding: 20px 0;
+}
+.profile__note-answer {
+    padding-left: 30px;
+}
+.profile__name {
+    font-size: 28px;
+}
+.profile__title {
+    font-family: "Roboto", sans-serif;
+    font-size: 26px;
+}
+.profile__text {
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+}
+.profile__form * {
+    display: block;
+    width: 320px;
+}
+.profile__form-btn {
+    border: none;
+}
+.form__title {
+    font-family: "Roboto", sans-serif;
+    font-size: 26px;
+}
+.profile__a, .profile__a:hover {
+    text-decoration: none;
+}
