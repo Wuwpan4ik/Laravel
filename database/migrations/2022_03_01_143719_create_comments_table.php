@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateCommentsTable extends Migration
 {
+    use \Kalnoy\Nestedset\NodeTrait;
     /**
      * Run the migrations.
      *
@@ -14,14 +15,16 @@ class CreateCommentsTable extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->engine = "InnoDB";
+            $table->integer('id', true);
             $table->char('title', 64);
             $table->text('description');
-            $table->integer('id_user');
-            $table->integer('to_user');
+            $table->integer('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('user_to')->nullable();
+            $table->foreign('user_to')->references('id')->on('users');
+            $table->nestedSet();
             $table->timestamps();
-            $table->foreign('id_user')->references('id')->on('users');
-            $table->foreign('to_user')->references('id')->on('users');
         });
     }
 
@@ -32,6 +35,8 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::table('table', function (Blueprint $table) {
+            $table->dropNestedSet();
+        });
     }
 }

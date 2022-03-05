@@ -13,8 +13,8 @@
             @if (Auth::user())
                 <li class="nav-item">Вы пользователь: {{ Auth::user()->id }}</li>
             @else
-                <li class="nav-item"><a href="{{ url('register/')}}" class="nav-link link-dark px-2">Login</a></li>
-                <li class="nav-item"><a href="{{ url('login/')}}" class="nav-link link-dark px-2">Sign up</a></li>
+                <li class="nav-item"><a href="{{ route('register')}}" class="nav-link link-dark px-2">Login</a></li>
+                <li class="nav-item"><a href="{{ route('login')}}" class="nav-link link-dark px-2">Sign up</a></li>
             @endif
         </ul>
         <p>

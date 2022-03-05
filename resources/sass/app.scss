@@ -13,12 +13,16 @@
 .profile__notes {
     margin-left: 15px;
 }
+.profile__note {
+    margin-left: 15px;
+}
 .profile__notes-all *{
     display: inline-block;
     padding: 20px 0;
 }
 .profile__note-answer {
-    padding-left: 30px;
+    position: relative;
+    margin: 30px 0 30px 60px;
 }
 .profile__name {
     font-size: 28px;
@@ -38,10 +42,24 @@
 .profile__form-btn {
     border: none;
 }
+.profile__a, .profile__a:hover {
+    text-decoration: none;
+}
 .form__title {
     font-family: "Roboto", sans-serif;
     font-size: 26px;
 }
-.profile__a, .profile__a:hover {
-    text-decoration: none;
+.form__delete-btn {
+    font-size: 18px;
+    color: #ff5d1a;
+    background-color: transparent;
+    border: none;
+}
+.profile__note-container {
+    position: relative;
+}
+.form__delete {
+    position: absolute;
+    left: -30px;
+    top: 30px;
 }

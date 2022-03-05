@@ -10965,13 +10965,18 @@ a.text-dark:focus {
   margin-left: 15px;
 }
 
+.profile__note {
+  margin-left: 15px;
+}
+
 .profile__notes-all * {
   display: inline-block;
   padding: 20px 0;
 }
 
-.profile__note {
-  background-color: rgba(8, 7, 18, 0.04);
+.profile__note-answer {
+  position: relative;
+  margin: 30px 0 30px 60px;
 }
 
 .profile__name {
@@ -10997,13 +11002,30 @@ a.text-dark:focus {
   border: none;
 }
 
+.profile__a,
+.profile__a:hover {
+  text-decoration: none;
+}
+
 .form__title {
   font-family: "Roboto", sans-serif;
   font-size: 26px;
 }
 
-.profile__a,
-.profile__a:hover {
-  text-decoration: none;
+.form__delete-btn {
+  font-size: 18px;
+  color: #ff5d1a;
+  background-color: transparent;
+  border: none;
+}
+
+.profile__note-container {
+  position: relative;
+}
+
+.form__delete {
+  position: absolute;
+  left: -30px;
+  top: 30px;
 }
 
