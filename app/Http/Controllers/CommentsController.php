@@ -5,19 +5,27 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\deleteComment;
-use http\Env\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
 class CommentsController extends Controller
 {
-    public function page($id)
+    public function page($id, $success = False)
     {
-        $comments = Comment::where('user_to', '=', $id)->whereNull('parent_id')->withDepth()->with('children')->paginate(5, 1);
-        //$comments = Comment::where('user_to', '=', $id)->whereNull('parent_id')->withDepth()->with('children')->get()->toTree();
-
+        $comments = Comment::where('user_id', '=', $id)->skip(0)->take(2)->get();
         $name = DB::table('users')->where('id', '=', $id)->value('email');
+
+        $success = request()->input('success');
+        if ($success != False) {
+            $comments_all = $comments->concat(Comment::skip(2)->take(PHP_INT_MAX)->get());
+            $comments = $comments_all;
+            return view("user", [
+                'notes' => $comments,
+                'id' => $id,
+                'name' => $name
+            ]);
+        }
 
         return view("user", [
             'notes' => $comments,

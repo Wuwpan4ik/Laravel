@@ -10966,6 +10966,7 @@ a.text-dark:focus {
 }
 
 .profile__note {
+  position: relative;
   margin-left: 15px;
 }
 
@@ -10991,6 +10992,14 @@ a.text-dark:focus {
 .profile__text {
   font-family: "Roboto", sans-serif;
   font-size: 20px;
+}
+
+.profile__form-block {
+  display: none;
+}
+
+.profile__form.active {
+  display: block;
 }
 
 .profile__form * {
