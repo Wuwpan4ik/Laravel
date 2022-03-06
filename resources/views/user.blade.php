@@ -12,7 +12,7 @@
                     @foreach($notes as $note => $category)
                         <div class="profile__note">
                             <div class="profile__note-container">
-                                <div class="profile__title">{{ $category['notes'] }}</div>
+                                <div class="profile__title">{{ $category->title }}</div>
                                 <div class="profile__text">{{ $category->description }}</div>
                                 <button class="profile__form-btn" id="answer" title="Ответить {{$name}}">Ответить</button>
                                 <form class="profile__form profile__form-block" id="form" action="{{ route('comment-add') }}" method="POST">
@@ -120,5 +120,5 @@
     </script>
 
 {{--  Если с paginate  --}}
-{{--    {{ $notes->appends(['sort' => 'votes'])->links() }}--}}
+{{--{{ $notes->appends(['sort' => 'votes'])->links() }}--}}
 @endsection
