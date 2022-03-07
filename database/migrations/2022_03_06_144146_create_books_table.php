@@ -18,7 +18,7 @@ class CreateBooksTable extends Migration
             $table->bigInteger('id', true);
             $table->integer('user_id');
             $table->char('title');
-            $table->text('text');
+            $table->longText('text');
             $table->boolean('access_all');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

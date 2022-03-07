@@ -29,6 +29,9 @@ Route::get('/library/{id}', [LibraryController::class, 'index'])->name('library'
 Route::get('/book-delete/{id}', [LibraryController::class, 'delete'])->name('book-delete');
 Route::get('/book-edit/{id}', [LibraryController::class, 'edit'])->name('book-edit');
 Route::post('/book-edit/{id}', [LibraryController::class, 'editBook'])->name('book-edit-bs');
+Route::get('/book-add/{id}', [LibraryController::class, 'add'])->name('book-add');
+Route::post('/book-add/{id}', [LibraryController::class, 'addBook'])->name('book-add-bs');
+Route::get('/book-read/{id}', [LibraryController::class, 'read'])->name('book-read');
 
 
 Auth::routes();
