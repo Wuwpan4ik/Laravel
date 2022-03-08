@@ -54,10 +54,15 @@ class LibraryController extends Controller
         //
     }
     public function giveRight($id) {
-        $library_connect = new Library_connect();
-        $library_connect->library_id = Auth::user()->id;
-        $library_connect->user_to = $id;
-        $library_connect->save();
+        $secure = \request()->input('secure');
+        if ($secure == 'False') {
+            $library_connect = new Library_connect();
+            $library_connect->library_id = Auth::user()->id;
+            $library_connect->user_to = $id;
+            $library_connect->save();
+        } elseif ($secure == 'True') {
+            Library_connect::where('library_id', '=', Auth::user()->id)->where('user_to', '=', $id)->delete();
+        }
         return $this->index($id);
     }
 }

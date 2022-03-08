@@ -40,7 +40,7 @@ class User extends Authenticatable
 
     protected function isRights($id) {
         $temp = Library_connect::where('user_to', '=', $id)->where('library_id', '=', Auth::user()->id)->get();
-        if (!isset($temp[0]) and $id != Auth::user()->id) {
+        if (!isset($temp[0]) and $id != Auth::user()->id and count($temp) == 0) {
             return True;
         }
         return False;
