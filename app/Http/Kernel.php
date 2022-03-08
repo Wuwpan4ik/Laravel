@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\checkBook;
+use App\Http\Middleware\checkLibraryMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -62,6 +63,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'checkBook' => \App\Http\Middleware\checkBook::class,
+        'check-library' => \App\Http\Middleware\checkLibraryMiddleware::class,
     ];
 
     /**

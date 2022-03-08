@@ -2,10 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Book;
 use Closure;
-use http\Env\Request;
 use Illuminate\Support\Facades\Auth;
-use App\User;
 
 class checkBook
 {
@@ -16,8 +15,15 @@ class checkBook
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $id)
+    public function handle($request, Closure $next)
     {
-        return dd($id);
+        $id = $request->route('id');
+        $rigth =  $request->get('right');
+        $book = Book::find($id);
+        if ($book->user_id == Auth::user()->id or $rigth == $book->local_id) {
+            return response()->view('book-read', ['id' => $id, 'book' => $book]);
+        }
+        $books = Book::where('user_id', '=', $id)->get();
+        return response()->view('library', ['id' => $id, 'books' => $books]);
     }
 }

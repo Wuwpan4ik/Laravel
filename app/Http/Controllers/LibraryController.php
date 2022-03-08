@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use App\Http\Requests\BookRequest;
+use App\Library_connect;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class LibraryController extends Controller
@@ -49,6 +51,13 @@ class LibraryController extends Controller
     }
 
     public function read($id) {
-        return route('book-read', ['id' => $id, 'book' => Book::find($id)]);
+        //
+    }
+    public function giveRight($id) {
+        $library_connect = new Library_connect();
+        $library_connect->library_id = Auth::user()->id;
+        $library_connect->user_to = $id;
+        $library_connect->save();
+        return $this->index($id);
     }
 }

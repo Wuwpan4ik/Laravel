@@ -8,7 +8,7 @@
         <div class="profile">
             <h1 class="profile__name">Комментарии на странице пользователя {{ $name }}</h1>
             @if(Auth::user()::isRights($id))
-                <a href="give_right">Дать права</a>
+                <a href="{{ route('give-right', ['id' => $id]) }}">Дать права для библиотеке</a>
             @endif
             <div class="profile__notes">
                 @if ($notes)
