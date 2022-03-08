@@ -18,7 +18,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect()->route('user' ,['id' => (Auth::user()->id)])->with('id', Auth::user()->id);
+            return redirect()->route('library' ,['id' => (Auth::user()->id)])->with('id', Auth::user()->id);
         }
 
         return $next($request);

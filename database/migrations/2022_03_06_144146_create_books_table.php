@@ -21,6 +21,7 @@ class CreateBooksTable extends Migration
             $table->longText('text');
             $table->boolean('access_all');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->uuid('local_id');
             $table->timestamps();
         });
     }

@@ -7,6 +7,9 @@
     <div class="container">
         <div class="profile">
             <h1 class="profile__name">Комментарии на странице пользователя {{ $name }}</h1>
+            @if(Auth::user()::isRights($id))
+                <a href="give_right">Дать права</a>
+            @endif
             <div class="profile__notes">
                 @if ($notes)
                     @foreach($notes as $note => $category)

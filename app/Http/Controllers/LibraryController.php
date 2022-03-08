@@ -49,6 +49,6 @@ class LibraryController extends Controller
     }
 
     public function read($id) {
-        return view('book-read', ['id' => $id, 'book' => Book::find($id)]);
+        return route('book-read', ['id' => $id, 'book' => Book::find($id)]);
     }
 }

@@ -16,6 +16,8 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             return route('login');
+        } else {
+            return redirect()->route('user' ,['id' => (Auth::user()->id)])->with('id', Auth::user()->id);
         }
     }
 }

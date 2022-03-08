@@ -13,11 +13,11 @@ class CreateBookConnectsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('book_connects');
-        Schema::create('book_connects', function (Blueprint $table) {
+        Schema::dropIfExists('library_connects');
+        Schema::create('library_connects', function (Blueprint $table) {
             $table->bigInteger('id', true);
-            $table->bigInteger('book_id');
-            $table->foreign('book_id')->references('id')->on('books');
+            $table->integer('library_id');
+            $table->foreign('library_id')->references('id')->on('users');
             $table->integer('user_to');
             $table->foreign('user_to')->references('id')->on('users');
             $table->timestamps();
@@ -31,6 +31,6 @@ class CreateBookConnectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('book_connects');
+        Schema::dropIfExists('library_connects');
     }
 }
