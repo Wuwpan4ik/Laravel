@@ -9,7 +9,7 @@
         <div class="profile">
             <h1 class="profile__name">Добавить книгу</h1>
             <div class="profile__notes">
-                <form class="profile__form" action="{{ route('book-add-bs', ['id' => $id]) }}" method="POST">
+                <form class="profile__form" action="{{ route('book-add', ['id' => $id]) }}" method="POST">
                     @csrf
                    <input type="text" name="title" placeholder="Введите название">
                    <textarea style="width: 100%; height: 50vh;" name="text" cols="30" rows="10" placeholder="Введите текст "></textarea>

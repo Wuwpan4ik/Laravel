@@ -12,7 +12,7 @@ class CommentsController extends Controller
 {
     public function page($id, $success = False)
     {
-        $comments = Comment::where('user_id', '=', $id)->skip(0)->take(2)->get();
+        $comments = Comment::where('user_to', '=', $id)->skip(0)->take(2)->get();
         $name = DB::table('users')->where('id', '=', $id)->value('email');
 
         $success = request()->input('success');
