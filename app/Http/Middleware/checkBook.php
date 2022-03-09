@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Book;
+use App\LibraryConnect;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,10 +19,12 @@ class checkBook
     public function handle($request, Closure $next)
     {
         $id = $request->route('id');
-        $rigth =  $request->get('right');
         $book = Book::find($id);
-        if ($book->user_id == Auth::user()->id or $rigth == $book->local_id) {
-            return response()->view('book-read', ['id' => $id, 'book' => $book]);
+        $temp = LibraryConnect::where('user_to', '=', Auth::user()->id)->where('library_id', '=', $book->user_id)->first();
+
+        //Проверка имеется ли доступ по ссылке ИЛИ пользователь - создатель книги ИЛИ дан доступ к библиотеке
+        if ($request->get('right') == $book->local_id or $book->user_id == Auth::user()->id or !(is_null($temp))) {
+            return $next($request);
         }
         $books = Book::where('user_id', '=', $id)->get();
         return response()->view('library', ['id' => $id, 'books' => $books]);

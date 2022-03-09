@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function (){
         Route::get('/delete/{id}', [LibraryController::class, 'delete'])->name('book-delete');
         Route::any('/edit/{id}', [LibraryController::class, 'edit'])->name('book-edit');
         Route::any('/add/{id}', [LibraryController::class, 'add'])->name('book-add');
-        Route::get('/read/{id}', [LibraryController::class, 'read'])->name('book-read')->middleware('check-library','checkBook');
+        Route::get('/read/{id}', [LibraryController::class, 'read'])->name('book-read')->middleware('checkBook');
 
         // Передача прав на библиотеку
         Route::get('/right/{id}', [LibraryController::class, 'giveRight'])->name('give-right');
