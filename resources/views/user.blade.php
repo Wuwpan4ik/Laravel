@@ -12,12 +12,14 @@
                 <a href="{{ route('give-right', ['id' => $id, 'secure' => 'False']) }}">Дать доступ к библиотеке</a>
             @elseif(!Auth::user()::isRights($id) and Auth::user()->id != $id)
                 <a href="{{ route('give-right', ['id' => $id, 'secure' => 'True']) }}">Отключить доступ к библиотеке</a>
-                <a href="{{ route('library', ['id' => $id]) }}">Библиотека</a>
             @elseif(Auth::user()->id == $id)
+
             @endif
+            <a href="{{ route('library', ['id' => $id]) }}">Библиотека</a>
             <div class="profile__notes">
                 @if ($notes)
                     @foreach($notes as $note => $category)
+                        @if (!$category->parent_id)
                         <div class="profile__note">
                             <div class="profile__note-container">
                                 <div class="profile__title">{{ $category->title }}</div>
@@ -49,6 +51,7 @@
                                         @endif
                                     </div>
                                 @endforeach
+
                                 {{--Удаление комментария--}}
                                 @if ( $category->user_id == Auth::user()->id)
                                     <form class="form__delete" action="{{ route('comment-delete', ['note_id' => $category->id, 'user_to' => $category->user_to]) }}" method="POST">
@@ -64,6 +67,7 @@
 {{--                                Удаление комментария--}}
                             </div>
                         </div>
+                        @endif
                     @endforeach
                 @endif
             </div>

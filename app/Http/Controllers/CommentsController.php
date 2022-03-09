@@ -13,7 +13,7 @@ class CommentsController extends Controller
 {
     public function page($id, $success = False)
     {
-        $comments = Comment::where('user_to', '=', $id)->skip(0)->take(2)->get();
+        $comments = Comment::where('user_to', '=', $id)->skip(0)->take(3)->get();
         $name = DB::table('users')->where('id', '=', $id)->value('email');
 
         $success = request()->input('success');
@@ -36,7 +36,7 @@ class CommentsController extends Controller
 
     public function userComments($id)
     {
-        $comments = DB::table('Comments')->where('user_id', '=', $id)->get();
+        $comments = DB::table('Comments')->where('user_id', '=', $id)->toTree()->get();
 
         return view("user-comments", [
             'notes' => $comments,
@@ -72,7 +72,7 @@ class CommentsController extends Controller
     public function delete(deleteComment $request)
     {
         $comment = Comment::find($request->input('note_id'));
-        if ($comment->user_to == Auth::user()->id && $comment->user_id == Auth::user()->id) {
+        if ($comment->user_to == Auth::user()->id | $comment->user_id == Auth::user()->id) {
             $comment->delete();
         }
         return redirect('/user/' . $request->input('user_to'));
