@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\DB;
 
 class LibraryController extends Controller
 {
+    protected function checkUser($book) {
+        if ($book->user_id == Auth::user()->id) {
+            return True;
+        }
+        return False;
+    }
+
     public function index ($id) {
         $books = Book::where('user_id', '=', $id)->get();
         return view('library', ['id' => $id, 'books' => $books]);
@@ -39,34 +46,39 @@ class LibraryController extends Controller
 
     public function delete(Request $request) {
         $book = Book::find($request->input('book_id'));
-        if ($book->user_id == Auth::user()->id) {
+        if ($this->checkUser($book)) {
             $book->delete();
+            return $this->index($request->route('id'));
         }
-        return $this->index($request->route('id'));
+        return $this->index($book->user_id);
     }
 
     public function edit(Request $request) {
         // id книги
         $id = $request->route('id');
+        $book = Book::find($id);
+        if ($this->checkUser($book)) {
 
-        // Проверка на GET или POST запрос
-        if ($request->isMethod('GET')) {
+            // Проверка на GET или POST запрос
+            if ($request->isMethod('GET')) {
 
-            // Вывод свойств книги
-            $book = DB::table('books')->where('id', '=', $id)->get();
-            return view('library-edit', ['id' => $id, 'book' => $book[0]]);
+                // Вывод свойств книги
+                $book = DB::table('books')->where('id', '=', $id)->get();
+                return view('library-edit', ['id' => $id, 'book' => $book[0]]);
 
-        } elseif ($request->isMethod('POST')) {
+            } elseif ($request->isMethod('POST')) {
 
-            // Изменение свойств книги
-            $book = Book::find($id);
-            $book->title = \request()->input('title');
-            $book->text = \request()->input('text');
-            $book->save();
-            $books = Book::where('user_id', '=', $id)->get();
-            return $this->index($book->user_id);
+                // Изменение свойств книги
+                $book = Book::find($id);
+                $book->title = \request()->input('title');
+                $book->text = \request()->input('text');
+                $book->save();
+                $books = Book::where('user_id', '=', $id)->get();
+                return $this->index($book->user_id);
 
+            }
         }
+        return $this->index($book->user_id);
     }
 
     public function read($id) {
