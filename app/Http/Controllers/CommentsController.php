@@ -71,9 +71,10 @@ class CommentsController extends Controller
 
     public function delete(deleteComment $request)
     {
-        if ($request->route('id'))
-        $note_id = $request->input('note_id');
-        Comment::find($note_id)->delete();
+        $comment = Comment::find($request->input('note_id'));
+        if ($comment->user_to == Auth::user()->id && $comment->user_id == Auth::user()->id) {
+            $comment->delete();
+        }
         return redirect('/user/' . $request->input('user_to'));
     }
 }

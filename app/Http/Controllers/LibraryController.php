@@ -37,10 +37,12 @@ class LibraryController extends Controller
         }
     }
 
-    public function delete($id) {
-        DB::table('books')->delete(\request()->input('book_id'));
-        $books = Book::where('user_id', '=', $id)->get();
-        return $this->index($id);
+    public function delete(Request $request) {
+        $book = Book::find($request->input('book_id'));
+        if ($book->user_id == Auth::user()->id) {
+            $book->delete();
+        }
+        return $this->index($request->route('id'));
     }
 
     public function edit(Request $request) {

@@ -33,6 +33,7 @@
             area.select();
             document.execCommand("copy");
             document.body.removeChild(area);
+            alert('Вы успешно скопировали ссылку');
         }
     </script>
 @endsection
