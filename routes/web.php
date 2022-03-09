@@ -34,11 +34,11 @@ Route::middleware(['auth'])->group(function (){
     Route::post('/form/delete', [CommentsController::class, 'delete'])->name('comment-delete');
 
     // Связанные с библоитекой
-    Route::prefix('book')->group(function (){
+    Route::prefix('book')->middleware('check-library')->group(function (){
         Route::get('/delete/{id}', [LibraryController::class, 'delete'])->name('book-delete');
         Route::any('/edit/{id}', [LibraryController::class, 'edit'])->name('book-edit');
         Route::any('/add/{id}', [LibraryController::class, 'add'])->name('book-add');
-        Route::get('/read/{id}', [LibraryController::class, 'read'])->name('book-read')->middleware('checkBook');
+        Route::get('/read/{id}', [LibraryController::class, 'read'])->name('book-read');
 
         // Передача прав на библиотеку
         Route::get('/right/{id}', [LibraryController::class, 'giveRight'])->name('give-right');

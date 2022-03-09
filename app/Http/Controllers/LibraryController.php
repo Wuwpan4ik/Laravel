@@ -26,22 +26,22 @@ class LibraryController extends Controller
     public function add(Request $request) {
         // id книги
         $id = $request->route('id');
+            if ($request->isMethod('GET')) {
+                // Вывод свойств книги
+                return view('library-add', ['id' => $id]);
 
-        if ($request->isMethod('GET')) {
-            // Вывод свойств книги
-            return view('library-add', ['id' => $id]);
+            } elseif ($request->isMethod('POST')) {
 
-        } elseif ($request->isMethod('POST')) {
-
-            // Изменение свойств книги
-            $book = new Book();
-            $book->user_id = $id;
-            $book->title = $request->input('title');
-            $book->text = $request->input('text');
-            $book->access_all = $request->input('access_all');
-            $book->save();
-            return $this->index($id);
-        }
+                // Изменение свойств книги
+                $book = new Book();
+                $book->user_id = $id;
+                $book->title = $request->input('title');
+                $book->text = $request->input('text');
+                $book->access_all = $request->input('access_all');
+                $book->save();
+                return $this->index($id);
+            }
+        return  $this->index(Auth::user()->id);
     }
 
     public function delete(Request $request) {
