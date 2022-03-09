@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UsersController extends Controller
 {
-    public function allUser()
+    public function allUsers()
     {
-        $notes = DB::table('users')->get();
+        $notes = User::get();
 
         return view("users-list", [
             'notes' => $notes,

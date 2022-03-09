@@ -36,17 +36,13 @@
                                         <div class="profile__title">{{ $item->title }}</div>
                                         <div class="profile__text">'{{ $category->description }}' - {{ $item->description }}</div>
                                         @if ( $item->user_id == Auth::user()->id)
-                                            <form class="form__delete" action="{{ route('comment-delete') }}" method="POST">
+                                            <form class="form__delete" action="{{ route('comment-delete', ['note_id' => $category->id, 'user_to' => $category->user_to]) }}" method="POST">
                                                 @csrf
-                                                <input type="hidden" name="user_to" value="{{ $item->user_to }}">
-                                                <input type="hidden" name="id_note" value="{{ $item->id }}">
                                                 <button title="Удалить комментарий" class="form__delete-btn"><i class="fa fa-times"></i></button>
                                             </form>
                                         @elseif ($id == Auth::user()->id)
-                                            <form class="form__delete" action="{{ route('comment-delete') }}" method="POST">
+                                            <form class="form__delete" action="{{ route('comment-delete', ['note_id' => $category->id, 'user_to' => $category->user_to]) }}" method="POST">
                                                 @csrf
-                                                <input type="hidden" name="user_to" value="{{ $item->user_to }}">
-                                                <input type="hidden" name="id_note" value="{{ $item->id }}">
                                                 <button title="Удалить комментарий" class="form__delete-btn"><i class="fa fa-times"></i></button>
                                             </form>
                                         @endif
@@ -54,17 +50,13 @@
                                 @endforeach
                                 {{--Удаление комментария--}}
                                 @if ( $category->user_id == Auth::user()->id)
-                                    <form class="form__delete" action="{{ route('comment-delete') }}" method="POST">
+                                    <form class="form__delete" action="{{ route('comment-delete', ['note_id' => $category->id, 'user_to' => $category->user_to]) }}" method="POST">
                                         @csrf
-                                        <input type="hidden" name="user_to" value="{{ $category->user_to }}">
-                                        <input type="hidden" name="id_note" value="{{ $category->id }}">
                                         <button title="Удалить комментарий" class="form__delete-btn"><i class="fa fa-times"></i></button>
                                     </form>
                                 @elseif ($id == Auth::user()->id)
-                                    <form class="form__delete" action="{{ route('comment-delete') }}" method="POST">
+                                    <form class="form__delete" action="{{ route('comment-delete', ['note_id' => $category->id, 'user_to' => $category->user_to]) }}" method="POST">
                                         @csrf
-                                        <input type="hidden" name="user_to" value="{{ $category->user_to }}">
-                                        <input type="hidden" name="id_note" value="{{ $category->id }}">
                                         <button title="Удалить комментарий" class="form__delete-btn"><i class="fa fa-times"></i></button>
                                     </form>
                                 @endif

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\deleteComment;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -42,7 +43,7 @@ class CommentsController extends Controller
         ]);
     }
 
-    public function create()
+    public function read()
     {
         $notes = Comment::latest()->get();
 
@@ -50,7 +51,7 @@ class CommentsController extends Controller
     }
 
 
-    public function addComment(CommentRequest $request)
+    public function create(CommentRequest $request)
     {
         $comment = Comment::create([
             'title' => $request->input('title'),
@@ -68,10 +69,11 @@ class CommentsController extends Controller
     }
 
 
-    public function deleteComment(deleteComment $request)
+    public function delete(deleteComment $request)
     {
-        $comment = DB::table('Comments');
-        $comment->delete($request->input('id_note'));
+        if ($request->route('id'))
+        $note_id = $request->input('note_id');
+        Comment::find($note_id)->delete();
         return redirect('/user/' . $request->input('user_to'));
     }
 }

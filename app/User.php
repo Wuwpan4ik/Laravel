@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Library_connect;
+use App\LibraryConnect;
 use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
@@ -39,7 +39,7 @@ class User extends Authenticatable
     ];
 
     protected function isRights($id) {
-        $temp = Library_connect::where('user_to', '=', $id)->where('library_id', '=', Auth::user()->id)->get();
+        $temp = LibraryConnect::where('user_to', '=', $id)->where('library_id', '=', Auth::user()->id)->get();
         if (!isset($temp[0]) and $id != Auth::user()->id and count($temp) == 0) {
             return True;
         }

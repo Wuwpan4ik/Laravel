@@ -67,10 +67,11 @@ class LibraryController extends Controller
         }
     }
 
-
     public function read($id) {
-        //
+        $book = Book::find($id);
+        return response()->view('book-read', ['id' => $id, 'book' => $book]);
     }
+
     public function giveRight($id) {
         $secure = \request()->input('secure');
         if ($secure == 'False') {
