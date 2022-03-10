@@ -26,7 +26,6 @@ class checkBook
         if ($request->get('right') == $book->local_id or $book->user_id == Auth::user()->id or !(is_null($temp))) {
             return $next($request);
         }
-        $books = Book::where('user_id', '=', $id)->get();
-        return response()->view('library', ['id' => $id, 'books' => $books]);
+        return redirect('library/'.Auth::user()->id);
     }
 }

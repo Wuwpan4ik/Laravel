@@ -14,10 +14,10 @@ class CommentsController extends Controller
 {
     public function page($id)
     {
-        (request()->input('success')) ? $success = request()->input('success') : $success = 2;
-        $comments = User::find($id)->comments->take($success);
-        $name = User::where('id', '=', $id)->value('email');
-        return view("user", compact('id', 'comments', 'name'));
+        (request()->input('success')) ? $success = request()->input('success') : $success = 5;
+        $name = User::where('id', $id)->value('email');
+        $comments = User::find($id)->getComments->take($success);
+        return view("user", compact('name', 'id', 'comments'));
     }
 
     public function userComments($id)
