@@ -17,21 +17,18 @@
             @endif
             <a href="{{ route('library', ['id' => $id]) }}">Библиотека</a>
             <div class="profile__notes">
-                @if ($notes)
-                    @foreach($notes as $note => $category)
+                @if ($comments)
+                    @foreach($comments as $note => $category)
                         @if (!$category->parent_id)
                         <div class="profile__note">
                             <div class="profile__note-container">
                                 <div class="profile__title">{{ $category->title }}</div>
                                 <div class="profile__text">{{ $category->description }}</div>
                                 <button class="profile__form-btn" id="answer" title="Ответить {{$name}}">Ответить</button>
-                                <form class="profile__form profile__form-block" id="form" action="{{ route('comment-add') }}" method="POST">
+                                <form class="profile__form profile__form-block" id="form" action="{{ route('comment-add', ['user_to' => $id, 'user_id' => Auth::user()->id, 'parent' => $category->id ]) }}" method="POST">
                                     @csrf
                                     <input type="text" name="title" class="profile__input" placeholder="Заголовок">
                                     <textarea name="comment" id="comment"></textarea>
-                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                    <input type="hidden" name="user_to" value="{{ $id }}">
-                                    <input type="hidden" name="parent" value="{{ $category->id }}">
                                     <button type="submit" class="profile__form-btn">Отправить</button>
                                 </form>
                                 @foreach($category->children as $item)
@@ -112,7 +109,7 @@
                 e.preventDefault();
                 $.ajax({
                     type: "GET",
-                    url: '?success=True',
+                    url: '?success=4',
                     data: $(this).serialize(),
                     success: function(data)
                     {

@@ -5,38 +5,24 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\deleteComment;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
 class CommentsController extends Controller
 {
-    public function page($id, $success = False)
+    public function page($id)
     {
-        $comments = Comment::where('user_to', '=', $id)->skip(0)->take(3)->get();
-        $name = DB::table('users')->where('id', '=', $id)->value('email');
-
-        $success = request()->input('success');
-        if ($success != False) {
-            $comments_all = $comments->concat(Comment::skip(2)->take(PHP_INT_MAX)->get());
-            $comments = $comments_all;
-            return view("user", [
-                'notes' => $comments,
-                'id' => $id,
-                'name' => $name
-            ]);
-        }
-
-        return view("user", [
-            'notes' => $comments,
-            'id' => $id,
-            'name' => $name
-        ]);
+        (request()->input('success')) ? $success = request()->input('success') : $success = 2;
+        $comments = User::find($id)->comments->take($success);
+        $name = User::where('id', '=', $id)->value('email');
+        return view("user", compact('id', 'comments', 'name'));
     }
 
     public function userComments($id)
     {
-        $comments = DB::table('Comments')->where('user_id', '=', $id)->toTree()->get();
+        $comments = Comment::where('user_id', '=', $id)->get();
 
         return view("user-comments", [
             'notes' => $comments,

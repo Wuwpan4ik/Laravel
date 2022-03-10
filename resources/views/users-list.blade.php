@@ -11,7 +11,7 @@
             <div class="profile__notes">
                 @foreach($notes as $note)
                     <div class="profile__note profile__notes-all">
-                        <a class="profile__a" href="{{ url('user/'. $note->id) }}">
+                        <a class="profile__a" href="{{ route('user', ['id' => $note->id]) }}">
                             <div class="profile__title">{{ $note->id }} - </div>
                             <div class="profile__text">{{ $note->email }}</div>
                         </a>

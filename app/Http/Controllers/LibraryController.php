@@ -86,8 +86,8 @@ class LibraryController extends Controller
         return response()->view('book-read', ['id' => $id, 'book' => $book]);
     }
 
-    public function giveRight($id) {
-        $secure = \request()->input('secure');
+    public function giveRight(Request $request, $id) {
+        $secure = $request->input('secure');
         if ($secure == 'False') {
             $library_connect = new LibraryConnect();
             $library_connect->library_id = Auth::user()->id;
