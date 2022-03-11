@@ -104,18 +104,18 @@
             $(document).on("click",'#answer',function () {
                 $(this).parent().find('#form').toggleClass('active');
             });
-
-            $('#sev').click(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    type: "GET",
-                    url: '?success=1',
-                    data: $(this).serialize(),
-                    success: function(data)
-                    {
-                        $('html').html(data);
-                    }
-                });
+        });
+        $('#sev').click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/getComments/{{$id}}',
+                type: 'GET',
+                cache: false,
+                dataType: 'html',
+                success: function(data)
+                {
+                    $('.profile__notes').html(data);
+                }
             });
         });
     </script>

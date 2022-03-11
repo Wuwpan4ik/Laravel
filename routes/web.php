@@ -28,6 +28,7 @@ Route::middleware(['auth'])->group(function (){
 
     // Страница пользователя
     Route::get('/user/{id}', [CommentsController::class, 'page'])->name('user');
+    Route::get('/getComments/{id}', [CommentsController::class, 'getComments'])->name('getComments');
 
     //Удаление - добавление комментария
     Route::post('/form/checker', [CommentsController::class, 'create'])->name('comment-add');
