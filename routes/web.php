@@ -28,7 +28,7 @@ Route::get('/getComments/{id}', [CommentsController::class, 'getComments'])->nam
 
 
 Route::middleware(['auth'])->group(function (){
-    
+
     //Удаление - добавление комментария
     Route::post('/form/checker', [CommentsController::class, 'create'])->name('comment-add');
     Route::post('/form/delete', [CommentsController::class, 'delete'])->name('comment-delete');
