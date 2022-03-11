@@ -13,7 +13,7 @@
                     <div class="profile__note profile__notes-all">
                         <a class="profile__a" href="{{ route('user', ['id' => $note->id]) }}">
                             <div class="profile__title">{{ $note->id }} - </div>
-                            <div class="profile__text">{{ $note->email }}</div>
+                            <div class="profile__text" style="margin:0px">{{ $note->email }}</div>
                         </a>
                     </div>
                 @endforeach

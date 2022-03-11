@@ -32,18 +32,22 @@ Route::middleware(['auth'])->group(function (){
     //Удаление - добавление комментария
     Route::post('/form/checker', [CommentsController::class, 'create'])->name('comment-add');
     Route::post('/form/delete', [CommentsController::class, 'delete'])->name('comment-delete');
+	Route::get('/delete/{id}', [LibraryController::class, 'delete'])->name('book-delete');
+	Route::any('/edit/{id}', [LibraryController::class, 'edit'])->name('book-edit');
+	Route::any('/add/{id}', [LibraryController::class, 'add'])->name('book-add');
+	Route::get('/read/{id}', [LibraryController::class, 'read'])->name('book-read');
 
     // Связанные с библоитекой
     Route::prefix('book')->middleware('check-library')->group(function (){
-        Route::get('/delete/{id}', [LibraryController::class, 'delete'])->name('book-delete');
-        Route::any('/edit/{id}', [LibraryController::class, 'edit'])->name('book-edit');
-        Route::any('/add/{id}', [LibraryController::class, 'add'])->name('book-add');
-        Route::get('/read/{id}', [LibraryController::class, 'read'])->name('book-read');
+        // Route::get('/delete/{book_id}', [LibraryController::class, 'delete'])->name('book-delete');
+        // Route::any('/edit/{book_id}', [LibraryController::class, 'edit'])->name('book-edit');
+        // Route::any('/add/{id}', [LibraryController::class, 'add'])->name('book-add');
+        // Route::get('/read/{book_id}', [LibraryController::class, 'read'])->name('book-read');
 
         // Передача прав на библиотеку
         Route::get('/right/{id}', [LibraryController::class, 'giveRight'])->name('give-right');
     });
-    Route::get('/library/{id}', [LibraryController::class, 'index'])->name('library')->middleware('check-library');
+    Route::get('/library/{id}', [LibraryController::class, 'index'])->name('library');
 });
 
 Auth::routes();

@@ -18,8 +18,8 @@
                         <div class="profile__text">{{ $book->getShortContent() }}</div>
                         @if(Auth::user()->id == $book->user_id)
                             <a href="{{route('book-delete',['book_id' => $book->id, 'id' => Auth::user()->id])}}">Удалить</a>
-                            <a href="{{ route('book-edit', ['book_id' => $book->id]) }}">Редактировать</a>
-                            <button onclick="copy('{{ route('book-read', ['book_id' => $book->id, 'right' => $book->local_id]) }}')">Поделиться доступом</button>
+                            <a href="{{ route('book-edit', ['book_id' => $book->id, 'id' => Auth::user()->id])}}">Редактировать</a>
+                            <button class='library__button' onclick="copy('{{ route('book-read', ['book_id' => $book->id, 'right' => $book->local_id]) }}')">Поделиться доступом</button>
                         @endif
                     </div>
                 @endforeach

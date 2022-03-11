@@ -55,7 +55,7 @@ class LibraryController extends Controller
 
     public function edit(Request $request) {
         // id книги
-        $id = $request->route('id');
+        $id = $request->input('book_id');
         $book = Book::find($id);
         if ($this->checkUser($book)) {
 
@@ -70,12 +70,11 @@ class LibraryController extends Controller
 
                 // Изменение свойств книги
                 $book = Book::find($id);
-                $book->title = \request()->input('title');
-                $book->text = \request()->input('text');
+                $book->title = $request->input('title');
+                $book->text = $request->input('text');
                 $book->save();
-                $books = Book::where('user_id', '=', $id)->get();
+                $books = Book::where('user_id', '=', Auth::user()->id)->get();
                 return $this->index($book->user_id);
-
             }
         }
         return $this->index($book->user_id);
