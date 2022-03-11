@@ -80,8 +80,9 @@ class LibraryController extends Controller
         return $this->index($book->user_id);
     }
 
-    public function read($id) {
-        $book = Book::find($id);
+    public function read(Request $request, $id) {
+        $book_id = $request->input('book_id');
+        $book = Book::find($book_id);
         return response()->view('book-read', ['id' => $id, 'book' => $book]);
     }
 

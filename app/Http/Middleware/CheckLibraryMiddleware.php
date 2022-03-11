@@ -20,10 +20,10 @@ class CheckLibraryMiddleware
     public function handle($request, Closure $next)
     {
         $id = $request->route('id');
-        $temp = LibraryConnect::where('user_to', '=', Auth::user()->id)->where('library_id', '=', $id)->first();
-		$book = Book::find($id);
+        $book_id = $request->input('book_id');
+        $temp = LibraryConnect::where('user_to', Auth::user()->id)->where('library_id', $id)->first();
         // Проверка если ли доступ у пользователя ИЛИ пользователи является ли автором
-        if (!(is_null($temp)) or $book->user_id == Auth::user()->id) {
+        if (!(is_null($temp)) or $id == Auth::user()->id) {
             return $next($request);
         }
         return redirect('user/'.Auth::user()->id);
