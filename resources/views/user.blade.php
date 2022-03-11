@@ -109,7 +109,7 @@
                 e.preventDefault();
                 $.ajax({
                     type: "GET",
-                    url: '?success=4',
+                    url: '?success=1',
                     data: $(this).serialize(),
                     success: function(data)
                     {

@@ -12,11 +12,15 @@ use Illuminate\Support\Facades\DB;
 
 class CommentsController extends Controller
 {
+    public function getComments($id) {
+        (request()->input('success')) ? $success = PHP_INT_MAX : $success = 5;
+        $comments = User::find($id)->getComments->where('parent_id', null)->take($success);
+        return $comments;
+    }
     public function page($id)
     {
-        (request()->input('success')) ? $success = request()->input('success') : $success = 5;
+        $comments = $this->getComments($id);
         $name = User::where('id', $id)->value('email');
-        $comments = User::find($id)->getComments->take($success);
         return view("user", compact('name', 'id', 'comments'));
     }
 
