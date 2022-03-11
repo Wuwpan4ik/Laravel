@@ -13,12 +13,13 @@ use Illuminate\Support\Facades\DB;
 class CommentsController extends Controller
 {
     public function getComments($id) {
-        $comments = User::find($id)->getComments->where('parent_id', null)->take(PHP_INT_MAX);
+        $comments = User::find($id)->getComments->where('parent_id', null)->all();
         return view("messages", compact('id', 'comments'));
     }
+
     public function page($id)
     {
-        (request()->input('success')) ? $success = PHP_INT_MAX : $success = 5;
+        $success = 5;
         $comments = User::find($id)->getComments->where('parent_id', null)->take($success);
         $name = User::where('id', $id)->value('email');
         return view("user", compact('name', 'id', 'comments'));

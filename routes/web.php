@@ -21,15 +21,14 @@ Route::get('/', [UsersController::class, 'allUsers'])->name('users-list');
 
 // Просмотр комментариев
 Route::get('/user-comments/{id}', [CommentsController::class, 'userComments'])->name('user-comments');
-
+// Страница пользователя
+Route::get('/user/{id}', [CommentsController::class, 'page'])->name('user');
+//Подгрузка комментариев
+Route::get('/getComments/{id}', [CommentsController::class, 'getComments'])->name('getComments');
 
 
 Route::middleware(['auth'])->group(function (){
-
-    // Страница пользователя
-    Route::get('/user/{id}', [CommentsController::class, 'page'])->name('user');
-    Route::get('/getComments/{id}', [CommentsController::class, 'getComments'])->name('getComments');
-
+    
     //Удаление - добавление комментария
     Route::post('/form/checker', [CommentsController::class, 'create'])->name('comment-add');
     Route::post('/form/delete', [CommentsController::class, 'delete'])->name('comment-delete');
