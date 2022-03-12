@@ -31,8 +31,7 @@ class LibraryController extends Controller
                 return view('library-add', ['id' => $id]);
 
             } elseif ($request->isMethod('POST')) {
-
-                // Изменение свойств книги
+                // Добавление книги
                 $book = new Book();
                 $book->user_id = $id;
                 $book->title = $request->input('title');
@@ -67,9 +66,7 @@ class LibraryController extends Controller
                 return view('library-edit', ['id' => $id, 'book' => $book[0]]);
 
             } elseif ($request->isMethod('POST')) {
-
                 // Изменение свойств книги
-                $book = Book::find($id);
                 $book->title = $request->input('title');
                 $book->text = $request->input('text');
                 $book->save();
