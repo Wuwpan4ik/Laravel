@@ -20,7 +20,7 @@ class LibraryController extends Controller
 
     public function index ($id) {
         $books = Book::where('user_id', '=', $id)->get();
-        return view('library', ['id' => $id, 'books' => $books]);
+        return view('library.library', ['id' => $id, 'books' => $books]);
     }
 
     public function add(Request $request) {
@@ -28,7 +28,7 @@ class LibraryController extends Controller
         $id = $request->route('id');
             if ($request->isMethod('GET')) {
                 // Вывод свойств книги
-                return view('library-add', ['id' => $id]);
+                return view('library.library-add', ['id' => $id]);
 
             } elseif ($request->isMethod('POST')) {
                 // Добавление книги
@@ -63,7 +63,7 @@ class LibraryController extends Controller
 
                 // Вывод свойств книги
                 $book = DB::table('books')->where('id', '=', $id)->get();
-                return view('library-edit', ['id' => $id, 'book' => $book[0]]);
+                return view('library.library-edit', ['id' => $id, 'book' => $book[0]]);
 
             } elseif ($request->isMethod('POST')) {
                 // Изменение свойств книги
@@ -80,7 +80,7 @@ class LibraryController extends Controller
     public function read(Request $request, $id) {
         $book_id = $request->input('book_id');
         $book = Book::find($book_id);
-        return response()->view('book-read', ['id' => $id, 'book' => $book]);
+        return response()->view('library.book-read', ['id' => $id, 'book' => $book]);
     }
 
     public function giveRight(Request $request, $id) {

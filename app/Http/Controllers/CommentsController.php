@@ -22,14 +22,14 @@ class CommentsController extends Controller
         $success = 5;
         $comments = User::find($id)->getComments->where('parent_id', null)->take($success);
         $name = User::where('id', $id)->value('email');
-        return view("user", compact('name', 'id', 'comments'));
+        return view("user.user", compact('name', 'id', 'comments'));
     }
 
     public function userComments($id)
     {
         $comments = Comment::where('user_id', '=', $id)->get();
 
-        return view("user-comments", [
+        return view("user.user-comments", [
             'notes' => $comments,
         ]);
     }

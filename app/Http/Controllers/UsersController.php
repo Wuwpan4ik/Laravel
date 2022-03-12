@@ -13,7 +13,7 @@ class UsersController extends Controller
     {
         $notes = User::get();
 
-        return view("users-list", [
+        return view("user.users-list", [
             'notes' => $notes,
         ]);
     }
