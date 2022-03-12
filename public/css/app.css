@@ -10992,7 +10992,7 @@ a.text-dark:focus {
 .profile__text {
   font-family: "Roboto", sans-serif;
   font-size: 20px;
-  margin: 10px 0;
+  margin: 10px 0px;
 }
 
 .profile__form-block {
@@ -11046,8 +11046,8 @@ a.text-dark:focus {
 
 .form__delete {
   position: absolute;
-  left: -30px;
-  top: 30px;
+  right: 10px;
+  top: 10px;
 }
 
 .profile__book-a {
@@ -11079,5 +11079,73 @@ a {
 
 .library__button:hover {
   background-color: cyan;
+}
+
+html {
+  font-size: 16px;
+}
+
+.media-body .author {
+  display: inline-block;
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 700;
+  margin-left: 15px;
+}
+
+.media-body .metadata {
+  display: block;
+  color: #fff;
+  font-size: 0.8125rem;
+}
+
+.title-comments {
+  font-size: 1.4rem;
+  font-weight: bold;
+  line-height: 1.5rem;
+  color: rgba(0, 0, 0, 0.87);
+  margin-bottom: 1rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid rgba(34, 36, 38, 0.15);
+}
+
+.media-left-img {
+  display: inline-block;
+  width: 47px;
+  border-radius: 15px;
+}
+
+.media {
+  position: relative;
+  margin-top: 0;
+  padding: 0px 0px 20px 0px;
+}
+
+.media-top {
+  border: 2px #3495e3 solid;
+  border-radius: 20px;
+}
+
+.media-list:first-child {
+  margin-top: 30px;
+}
+
+.media-list {
+  padding-left: 10px !important;
+}
+
+.media-text {
+  margin-left: 15px;
+}
+
+.panel-heading {
+  padding: 10px 15px;
+}
+
+.panel-primary > .panel-heading {
+  color: #fff;
+  background-color: #3495e3;
+  border-color: #3495e3;
+  border-radius: 15px;
 }
 
