@@ -59,6 +59,16 @@
         $('#sev').click(function(e) {
             e.preventDefault();
             $.ajax({
+                url: '/getJsonForQuestions/{{$id}}',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data)
+                {
+                    console.log(data)
+                }
+            });
+
+            $.ajax({
                 url: '/getComments/{{$id}}',
                 type: 'GET',
                 cache: false,

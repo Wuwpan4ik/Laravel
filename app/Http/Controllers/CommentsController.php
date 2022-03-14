@@ -12,14 +12,19 @@ use Illuminate\Support\Facades\DB;
 
 class CommentsController extends Controller
 {
+    public function getJsonForQuestions($id) {
+        $comments = User::find($id)->getComments->where('parent_id', null)->all();
+        return $comments;
+    }
+
     public function getComments($id) {
         $comments = User::find($id)->getComments->where('parent_id', null)->all();
-        return view("messages", compact('id', 'comments'));
+        return response()->view("messages", compact('id', 'comments'));
     }
 
     public function page($id)
     {
-        $success = 5;
+        $success = 2;
         $comments = User::find($id)->getComments->where('parent_id', null)->take($success);
         $name = User::where('id', $id)->value('email');
         return view("user.user", compact('name', 'id', 'comments'));

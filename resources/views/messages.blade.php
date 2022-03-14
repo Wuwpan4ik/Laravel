@@ -37,8 +37,8 @@
                                 <button title="Удалить комментарий" class="form__delete-btn"><i class="fa fa-times"></i></button>
                             </form>
                         @endif
-                        @foreach($category->children as $item)
                         <!-- Ещё один вложенный медиа-компонент (уровень 2) -->
+                        @foreach($category->children as $item)
                         <div class="media mb-2 mt-4 ml-4">
                             <div class="media-body">
                                 <div class="panel panel-primary">
@@ -67,8 +67,8 @@
 
                             </div>
                         </div>
-                        <!-- Конец ещё одного вложенного комментария (уровень 2) -->
                         @endforeach
+{{--                        <!-- Конец ещё одного вложенного комментария (уровень 2) -->--}}
                     </div>
                 </li>
                 <!-- Конец комментария (уровень 1) -->

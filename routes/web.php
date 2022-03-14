@@ -26,6 +26,8 @@ Route::get('/user/{id}', [CommentsController::class, 'page'])->name('user');
 //Подгрузка комментариев
 Route::get('/getComments/{id}', [CommentsController::class, 'getComments'])->name('getComments');
 
+Route::get('getJsonForQuestions/{id}', [CommentsController::class, 'getJsonForQuestions']);
+
 
 Route::middleware(['auth'])->group(function (){
 
