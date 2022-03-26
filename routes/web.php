@@ -42,10 +42,10 @@ Route::middleware(['auth'])->group(function (){
          Route::any('/add/{id}', [LibraryController::class, 'add'])->name('book-add');
          Route::any('/edit/{id}', [LibraryController::class, 'edit'])->name('book-edit');
          Route::get('/read/{id}', [LibraryController::class, 'read'])->name('book-read');
-         Route::get('/right/{id}', [LibraryController::class, 'giveRight'])->name('give-right');
+         Route::get('/right/{id}', [LibraryController::class, 'giveRight'])->name('library.give-right');
         // Передача прав на библиотеку
     });
-    Route::get('/library/{id}', [LibraryController::class, 'index'])->name('library')->middleware('check-library');
+    Route::get('/library/{id}', [LibraryController::class, 'index'])->name('library.library')->middleware('check-library');
 });
 
 Auth::routes();

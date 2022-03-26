@@ -9,13 +9,13 @@
             <h1 class="mb-5" >Страница {{ $name }}</h1>
             <h2 class="profile__name">Комментарии на странице пользователя {{ $name }}</h2>
             @if(Auth::user()::isRights($id) and Auth::user()->id != $id)
-                <a href="{{ route('give-right', ['id' => $id, 'secure' => 'False']) }}">Дать доступ к библиотеке</a>
+                <a href="{{ route('library.give-right', ['id' => $id, 'secure' => 'False']) }}">Дать доступ к библиотеке</a>
             @elseif(!Auth::user()::isRights($id) and Auth::user()->id != $id)
-                <a href="{{ route('give-right', ['id' => $id, 'secure' => 'True']) }}">Отключить доступ к библиотеке</a>
+                <a href="{{ route('library.give-right', ['id' => $id, 'secure' => 'True']) }}">Отключить доступ к библиотеке</a>
             @elseif(Auth::user()->id == $id)
 
             @endif
-            <a href="{{ route('library', ['id' => $id]) }}">Библиотека</a>
+            <a href="{{ route('library.library', ['id' => $id]) }}">Библиотека</a>
             <div class="profile__notes">
                 @include('messages')
             </div>

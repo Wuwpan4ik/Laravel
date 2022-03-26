@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                                 @if ( $item->user_id == Auth::user()->id)
-                                    <form class="form__delete" action="{{ route('comment-delete', ['note_id' => $category->id, 'user_to' => $category->user_to]) }}" method="POST">
+                                    <form class="form__delete" action="{{ route('user.comment-delete', ['note_id' => $category->id, 'user_to' => $category->user_to]) }}" method="POST">
                                         @csrf
                                         <button title="Удалить комментарий" class="form__delete-btn"><i class="fa fa-times"></i></button>
                                     </form>
